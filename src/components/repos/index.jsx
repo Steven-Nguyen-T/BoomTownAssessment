@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { dateConverter } from "../helper";
+import { Button } from "@mui/material";
 
 const Repos = (props) => {
   const {repoUrl} = props;
   const [repoData, setRepoData] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     fetchRepoData();
@@ -57,9 +59,14 @@ const Repos = (props) => {
     )
   }
 
+  const renderRepos = () => {
+    if (clicked) return <div>{repoArr}</div>
+  }
+
   return (
     <div>
-      {repoArr}
+      <Button variant="contained" onClick={() => setClicked(!clicked)}>Repos</Button>
+      {renderRepos()}
     </div>
   )
 }
