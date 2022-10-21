@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Organization } from './components/organization';
+import { Organization } from './components/organization'
 
 const App = () => {
   return (
