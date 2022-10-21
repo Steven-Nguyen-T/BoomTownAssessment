@@ -18,12 +18,12 @@ const Events = (props) => {
         'Accept': 'application/json'
       }
     });
-
+    
     if (!res.ok) {
       const err = `Status: ${res.status}, there is an error with the fetch request`;
       throw new Error(err);
     }
-
+    
     const resEventsData = await res.json();
     setEventsData(resEventsData);
   }
@@ -38,17 +38,16 @@ const Events = (props) => {
     }
   });
 
-  console.log(formatEventsData, 'here 4 events')
   const eventsArr = [];
   for (let i = 0; i < formatEventsData.length; i++) {
     const el = formatEventsData[i];
     eventsArr.push(
-      <ul>
-        <li>ID: {el.id}</li>
-        <li>Type: {el.type}</li>
-        <li>Repo Name: {el.repo_name}</li>
-        <li>Repo Url: {el.repo_url}</li>
-        <li>Created At: {dateConverter(el.created_at)}</li>
+      <ul key={i}>
+        <li><strong>ID: </strong>{el.id}</li>
+        <li><strong>Type: </strong>{el.type}</li>
+        <li><strong>Repo Name: </strong>{el.repo_name}</li>
+        <li><strong>Repo URL: </strong><a href={el.repo_url}>{el.repo_url}</a></li>
+        <li><strong>Created At: </strong>{dateConverter(el.created_at)}</li>
       </ul>
     )
   }

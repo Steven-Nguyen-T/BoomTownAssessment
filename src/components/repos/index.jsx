@@ -41,20 +41,19 @@ const Repos = (props) => {
     }
   });
 
-  console.log(formatRepoData, 'here')
   const repoArr = [];
   for (let i = 0; i < formatRepoData.length; i++) {
     const el = formatRepoData[i];
     repoArr.push(
-      <ul>
-        <li>ID: {el.id}</li>
-        <li>Name: {el.name}</li>
-        <li>Url: {el.html_url}</li>
-        <li>Description: {el.description}</li>
-        <li>Language: {el.language}</li>
-        <li>Created At: {dateConverter(el.created_at)}</li>
-        <li>Updated At: {dateConverter(el.updated_at)}</li>
-        <li>Pushed At: {dateConverter(el.pushed_at)}</li>
+      <ul key={i}>
+        <li><strong>ID: </strong>{el.id}</li>
+        <li><strong>Name: </strong>{el.name}</li>
+        <li><strong>URL: </strong><a href={el.html_url}>{el.html_url}</a></li>
+        <li><strong>Description: </strong>{el.description}</li>
+        <li><strong>Language: </strong>{el.language}</li>
+        <li><strong>Created At: </strong>{dateConverter(el.created_at)}</li>
+        <li><strong>Updated At: </strong>{dateConverter(el.updated_at)}</li>
+        <li><strong>Pushed At: </strong>{dateConverter(el.pushed_at)}</li>
       </ul>
     )
   }

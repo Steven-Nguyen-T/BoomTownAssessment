@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Organization } from './components/organization'
 
 const App = () => {
