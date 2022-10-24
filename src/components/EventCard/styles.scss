@@ -1,0 +1,11 @@
+.text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 500px;
+}
+
+.event-card {
+  width: 500px;
+  margin-bottom: 10px;
+}

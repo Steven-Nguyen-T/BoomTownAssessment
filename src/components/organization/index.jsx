@@ -1,86 +1,42 @@
-import { useState, useEffect } from 'react';
-import { Events } from '../events';
-import { Hooks } from '../hooks';
-import { Repos } from '../repos'
-import { Issues } from '../issues';
-import { Members } from '../members';
-import { PublicMembers } from '../publicMembers';
+import ErrorPage from '../ErrorPage';
+import { useFetchedData } from '../../helper';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+import { apiUrl } from '../../constants';
+import './styles.scss';
 
 const Organization = () => {
-  const apiUrl = 'https://api.github.com/orgs/boomtownroi';
-
-  const [data, setData] = useState({});
-  const [repoUrl, setRepoUrl] = useState('');
-  const [eventsUrl, setEventsUrl] = useState('');
-  const [hooksUrl, setHooksUrl] = useState('');
-  const [issuesUrl, setIssuesUrl] = useState('');
-  const [membersUrl, setMembersUrl] = useState('');
-  const [publicMembersUrl, setPublicMembersUrl] = useState('');
-
-  const [boomTownInfo, setBoomTownInfo] = useState(
-    {
-      avatar: '',
-      blog: '',
-      followers: '',
-      following: '',
-      public_repos: '',
-    }
-  );
-
-  // Initial Data Fetch
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  //Async function to fetch data
-  async function fetchData() {
-    const res = await fetch(apiUrl, {
-      headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-    });
-    //Error handling
-    if (res.ok) {
-      const newData = await res.json();
-      console.log(newData, 'newdata')
-      setData(newData);
-      setBoomTownInfo({...boomTownInfo, 
-        avatar: newData.avatar_url,
-        blog: newData.blog,
-        followers: newData.followers,
-        following: newData.following,
-        public_repos: newData.public_repos,
-      })
-      setRepoUrl(newData.repos_url);
-      setEventsUrl(newData.events_url);
-      setHooksUrl(newData.hooks_url);
-      setIssuesUrl(newData.issues_url);
-      setMembersUrl(newData.members_url);
-      setPublicMembersUrl(newData.public_members_url);
-    } else if (!res.ok) {
-      const err = `Status: ${res.status}, there is an error with the fetch request`;
-      throw new Error(err)
-    }
-  }
+  const [data, error, statusCode] = useFetchedData(apiUrl);
+  if (statusCode === 404) return <ErrorPage error={error} statusCode={statusCode} />
 
   return (
     <div>
-      <ul>
-        <img src={boomTownInfo.avatar} />
-        <li>Website: <a href={boomTownInfo.blog}>{boomTownInfo.blog}</a></li>
-        <li>Followers: {boomTownInfo.followers}</li>
-        <li>Following: {boomTownInfo.following}</li>
-        <li>{boomTownInfo.public_repos} repositories</li>
-      </ul>
-      <Repos repoUrl={repoUrl} />
-      <Events eventsUrl={eventsUrl} />
-      <Hooks hooksUrl={hooksUrl} />
-      <Issues issuesUrl={issuesUrl} />
-      <Members membersUrl={membersUrl} />
-      <PublicMembers publicMembersUrl={publicMembersUrl} />
+      {!error &&
+        <div className='container'>
+          <Card className='card-container'>
+            <a href={data?.html_url}>
+              <CardActionArea>
+                <CardMedia
+                  component='img'
+                  image={data?.avatar_url}
+                />
+              </CardActionArea>
+            </a>
+            <CardContent className='details'>
+              <Typography gutterBottom variant="overline" component="div">{`ID: ${data?.id}`}</Typography>
+              <Typography gutterBottom variant="overline" component="div">{`Name: ${data?.name}`}</Typography>
+              <Typography gutterBottom variant="overline" component="div">{`Verification Status: ${data?.is_verified}`}</Typography>
+              <Typography className={new Date(data?.created_at) > new Date(data?.updated_at) ? 'most-recent' : ''} gutterBottom variant="overline" component="div">{`Created On: ${new Date(data?.created_at)}`}</Typography>
+              <Typography className={new Date(data?.created_at) < new Date(data?.updated_at) ? 'most-recent' : ''} gutterBottom variant="overline" component="div">{`Updated On: ${new Date(data?.updated_at)}`}</Typography>
+            </CardContent>
+          </Card>
+        </div>
+      }
     </div>
   )
 }
 
-export { Organization };
+export default Organization;

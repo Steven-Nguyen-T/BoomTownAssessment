@@ -1,30 +1,16 @@
-import { useState, useEffect } from "react";
+import { useFetchedData } from '../../helper';
+import { apiUrl } from '../../constants';
+import ErrorPage from '../ErrorPage';
+import Typography from '@mui/material/Typography';
 
-const Hooks = (props) => {
-  const { hooksUrl } = props;
-  const [hooksData, setHooksData] = useState([]);
+const Hooks = () => {
+	const [hooks, error, statusCode] = useFetchedData(`${apiUrl}/hooks`)
+	if (statusCode === 404) return <ErrorPage error={error} statusCode={statusCode}/>
+	return (
+		<div>
+				{!error && <Typography variant='h3'>Hooks: {hooks} </Typography>}
+		</div>
+	)
+}
 
-  useEffect(() => {
-    fetchHooksData();
-  }, []);
-
-  async function fetchHooksData() {
-    const res = await fetch(hooksUrl, {
-      headers: {
-        "Content-type": "application/json",
-        Accept: "application/json",
-      },
-    });
-
-    if (!res.ok) {
-      const err = `Status: ${res.status}, there is an error with the fetch request`;
-      throw new Error(err);
-    }
-
-    const resHooksData = await res.json();
-    setHooksData(resHooksData);
-    //No Data Found
-  }
-};
-
-export { Hooks };
+export default Hooks;
