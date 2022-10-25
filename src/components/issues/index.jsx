@@ -7,7 +7,7 @@ const Issues = () => {
 	const [issues, error, statusCode] = useFetchedData(`${apiUrl}/issues`)
 	if (statusCode === 404) return <ErrorPage error={error} statusCode={statusCode}/>
 	return (
-		<div>
+		<div className='issues-container'>
 				{!error && <Typography variant='h3'>Issues: {issues} </Typography>}
 		</div>
 	)

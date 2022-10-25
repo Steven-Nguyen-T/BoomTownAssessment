@@ -1,9 +1,8 @@
 import { useFetchedData } from "../../helper";
 import { apiUrl } from "../../constants";
 import ErrorPage from "../ErrorPage";
-import Typography from '@mui/material/Typography';
+import {Typography, Card} from '@mui/material/';
 import EventCard from "../EventCard";
-import Card from '@mui/material/Card';
 
 const Events = () => {
   const [events, error, statusCode] = useFetchedData(`${apiUrl}/events`);
@@ -11,15 +10,15 @@ const Events = () => {
   console.log(events)
 
   return (
-    <div>
+    <div className='event-container'>
       {!error &&
-        <div>
+        <div className='event-card-container'>
           <Typography variant="h3">Events</Typography>
           <div className="event-list">
             <Card>
               {events.map((event, i) => {
                 return (
-                  <div key={i} className='items'>
+                  <div key={i} className='event'>
                     <EventCard event={event} />
                   </div>
                 )

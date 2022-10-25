@@ -6,9 +6,9 @@ import './App.scss';
 const App = () => {
   return (
     <BrowserRouter>
-      <div>
+      <div className='app-container'>
         <Navbar />
-        <div className='display'>
+        <div className='app-display'>
           <Routes>
             <Route exact path='/' element={<Organization />} />
             <Route path='/repos' element={<Repos />} />
@@ -17,7 +17,6 @@ const App = () => {
             <Route path='/issues' element={<Issues />} />
             <Route path='/members' element={<Members />} />
             <Route path='/public-members' element={<PublicMembers />} />
-            <Route path='/404' element={<ErrorPage />} />
             <Route path='*' element={<ErrorPage />} />
           </Routes>
         </div>

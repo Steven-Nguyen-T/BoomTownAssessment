@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import {List, ListItem} from '@mui/material/';
 import './styles.scss';
 
 const Navbar = () => {

@@ -1,9 +1,8 @@
 import { useFetchedData } from "../../helper";
 import { apiUrl } from "../../constants";
 import ErrorPage from "../ErrorPage";
-import Typography from '@mui/material/Typography';
+import {Typography, Card} from '@mui/material/';
 import RepoCard from "../RepoCard";
-import Card from '@mui/material/Card';
 import './styles.scss'
 
 const Repos = () => {
@@ -11,15 +10,15 @@ const Repos = () => {
   if (statusCode === 404) return <ErrorPage error={error} statusCode={statusCode}/>
 
   return (
-    <div>
-      {!error && 
-        <div>
+    <div className='repo-container'>
+      {!error &&
+        <div className='repo-card-container'>
           <Typography variant="h3">Repos</Typography>
-          <div>
+          <div className='repo-list'>
             <Card>
               {repos.map((repo, i) => {
                 return (
-                  <div key={i}>
+                  <div className='repo' key={i}>
                     <RepoCard repo={repo}/>
                   </div>
                 )

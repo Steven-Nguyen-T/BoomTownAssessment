@@ -1,8 +1,4 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import CardMedia from '@mui/material/CardMedia';
+import {Card, CardContent, Typography, CardActionArea, CardMedia} from '@mui/material/';
 import './styles.scss'
 
 const MemberCard = ({member}) => {

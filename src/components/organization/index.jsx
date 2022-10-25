@@ -1,21 +1,17 @@
 import ErrorPage from '../ErrorPage';
 import { useFetchedData } from '../../helper';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import {Card, CardContent, CardMedia, Typography, CardActionArea} from '@mui/material/';
 import { apiUrl } from '../../constants';
 import './styles.scss';
 
 const Organization = () => {
   const [data, error, statusCode] = useFetchedData(apiUrl);
   if (statusCode === 404) return <ErrorPage error={error} statusCode={statusCode} />
-
+  console.log(data)
   return (
-    <div>
+    <div className='organization-container'>
       {!error &&
-        <div className='container'>
+        <div className='main-container'>
           <Card className='card-container'>
             <a href={data?.html_url}>
               <CardActionArea>
