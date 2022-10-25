@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+<h1 align="center">
+  <br>
+    <img src='https://avatars.githubusercontent.com/u/1214096?v=4'/>
+    <br>
+  BoomTown Assessment
+  <br>
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Getting Started
+- Clone this repository: `https://github.com/Steven-Nguyen-T/BoomTownAssessment.git`
+- Install dependecies that the project requires: run `npm i`
+- Run: `npm start`
+- To view in the browser please redirect to: [http://localhost:3000](http://localhost:3000).
 
-## Available Scripts
+# Discussion of Solution
+The challenge was very open ended in terms of how to present the data, the main task at hand seemed to be to fetch the data and to render it on a screen. Some challenges that I faced early on was deciding the best way to fetch the data. I initially fetched the data at the top level component using the given endpoint and prop drilled down the URLs needed to fetch the data for each component (Organization, Repos, Events, Hooks, Issues, Members, and Public Members). Instead, I used react router in order to navigate to different pages using a navbar. On that component page, it would only fetch the necessary data that it needed and did not require lots of prop drilling.
 
-In the project directory, you can run:
+From looking at the data, I noticed that all components had their respective URLS so I decided to make a custom hook to fetch data at the component level whenever it deemed necessary. In my `helper` folder, I had lots of resuable functions that I used for my first solution while fetching and prop drilling down URLs. I noticed that the members and public members had additional characters in them so I handled it appropriately. Rather, for my final solution I simply added the correct ending of the URL at the end of each custom hook call. I also noticed that the Hooks and Issues URL did not return any information so I decided to use a modal to display the error information that I received. To handle the task of comparing dates at the organization level, I used a turnary operator to decide on the className where it would highlight the newer date to be a different color. For error handling, I used a try-catch block to log the errors in the modal.
 
-### `npm start`
+I used a very simple SCSS layout utilizing Material UI for simplicity and a responsive UI.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
