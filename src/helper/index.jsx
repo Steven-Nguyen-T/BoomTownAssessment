@@ -22,7 +22,6 @@ export const useFetchedData = (url) => {
     const fetchData = async () => {
       try {
         let response = await fetch(url);
-        console.log(response, 'this is res')
         if (response.status === 200) {
           setData(await response.json());
         } else if (response.status === 404) {

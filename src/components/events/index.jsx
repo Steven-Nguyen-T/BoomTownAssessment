@@ -7,7 +7,6 @@ import EventCard from "../EventCard";
 const Events = () => {
   const [events, error, statusCode] = useFetchedData(`${apiUrl}/events`);
   if (statusCode === 404) return <ErrorPage error={error} statusCode={statusCode}/>;
-  console.log(events)
 
   return (
     <div className='event-container'>

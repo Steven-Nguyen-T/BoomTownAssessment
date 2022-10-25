@@ -7,7 +7,7 @@ import './styles.scss';
 const Organization = () => {
   const [data, error, statusCode] = useFetchedData(apiUrl);
   if (statusCode === 404) return <ErrorPage error={error} statusCode={statusCode} />
-  console.log(data)
+
   return (
     <div className='organization-container'>
       {!error &&
